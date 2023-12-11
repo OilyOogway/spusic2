@@ -179,6 +179,7 @@ function endGame() {
 
     // Post the score to the server
     postScore();
+   getTopScores();
     // Reset score
     score = 0;
 
