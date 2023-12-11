@@ -158,39 +158,39 @@ app.post('/submitScore', async (req, res) => {
         }
       });
 
-      app.get('/getTopScores', async (req, res) => {
-        let client;  // Declare the client variable outside the try block
+    //   app.get('/getTopScores', async (req, res) => {
+    //     let client;  // Declare the client variable outside the try block
     
-        try {
-            client = await MongoClient.connect(MONGODB_URI);
-            const dbo = client.db('test');
-            const collection = dbo.collection('logins');
-            console.log("Connected");
+    //     try {
+    //         client = await MongoClient.connect(MONGODB_URI);
+    //         const dbo = client.db('test');
+    //         const collection = dbo.collection('logins');
+    //         console.log("Connected");
     
-            // Find the top 10 scores, sorted in descending order
-            const result = await collection.find().sort({ highScore: -1 }).limit(10).toArray();
-            console.log('MongoDB Query Result:', result);
-            // Extract relevant data for response
-            const topScores = result.map(({ username, highScore }) => ({ username, highScore }));
+    //         // Find the top 10 scores, sorted in descending order
+    //         const result = await collection.find().sort({ highScore: -1 }).limit(10).toArray();
+    //         console.log('MongoDB Query Result:', result);
+    //         // Extract relevant data for response
+    //         const topScores = result.map(({ username, highScore }) => ({ username, highScore }));
     
-            console.log('Top Scores:', topScores);
+    //         console.log('Top Scores:', topScores);
     
-            res.status(200).json({ topScores });
-        } catch (error) {
-            console.error('Error connecting to the database or getting top scores:', error);
-            res.status(500).json({ error: 'Internal Server Error' });
-        } finally {
-            if (client) {
-                client.close();  // Close the client in the finally block
-            }
-        }
-    });
+    //         res.status(200).json({ topScores });
+    //     } catch (error) {
+    //         console.error('Error connecting to the database or getting top scores:', error);
+    //         res.status(500).json({ error: 'Internal Server Error' });
+    //     } finally {
+    //         if (client) {
+    //             client.close();  // Close the client in the finally block
+    //         }
+    //     }
+    // });
     
       
       
 
 //Route for getting the highest score
-app.get('/getHighScore', async (req, res) => {
+app.get('/getTopScores', async (req, res) => {
   try {
     const client = await MongoClient.connect(MONGODB_URI);
     const dbo = client.db('test');
