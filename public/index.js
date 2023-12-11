@@ -213,73 +213,74 @@ function postScore() {
     }
 }
 function realisticPrompt(message, defaultValue = "") {
-    const container = document.createElement("div");
-    container.style.position = "fixed";
-    container.style.top = "50%";
-    container.style.left = "50%";
-    container.style.transform = "translate(-50%, -50%)";
-    container.style.background = "#1d2630";
-    container.style.padding = "40px";
-    container.style.borderRadius = "15px";
-    container.style.boxShadow = "0 0 20px rgba(0, 0, 0, 0.4)";
-    container.style.color = "#fff";
-    container.style.fontFamily = "'Arial', sans-serif";
-  
-    const promptMessage = document.createElement("p");
-    promptMessage.textContent = message;
-    promptMessage.style.marginBottom = "20px";
-    promptMessage.style.fontSize = "1.2em";
-    container.appendChild(promptMessage);
-  
-    const input = document.createElement("input");
-    input.type = "text";
-    input.value = defaultValue;
-    input.style.width = "100%";
-    input.style.marginBottom = "20px";
-    input.style.border = "1px solid #bdc3c7";
-    input.style.borderRadius = "5px";
-    input.style.padding = "10px";
-    input.style.fontSize = "1em";
-    container.appendChild(input);
-  
-    const confirmButton = document.createElement("button");
-    confirmButton.textContent = "OK";
-    confirmButton.style.backgroundColor = "#2ecc71";
-    confirmButton.style.color = "#fff";
-    confirmButton.style.padding = "15px 30px";
-    confirmButton.style.border = "none";
-    confirmButton.style.borderRadius = "5px";
-    confirmButton.style.cursor = "pointer";
-    confirmButton.style.fontSize = "1.5em";
-    confirmButton.style.transition = "background-color 0.3s ease";
-    confirmButton.style.marginRight = "10px";
-    confirmButton.onclick = () => {
-      container.remove();
-      // Handle the input value here
-      console.log("Username entered:", input.value);
-    };
-    container.appendChild(confirmButton);
-  
-    const cancelButton = document.createElement("button");
-    cancelButton.textContent = "Cancel";
-    cancelButton.style.backgroundColor = "#e74c3c";
-    cancelButton.style.color = "#fff";
-    cancelButton.style.padding = "15px 30px";
-    cancelButton.style.border = "none";
-    cancelButton.style.borderRadius = "5px";
-    cancelButton.style.cursor = "pointer";
-    cancelButton.style.fontSize = "1.5em";
-    cancelButton.style.transition = "background-color 0.3s ease";
-    cancelButton.onclick = () => {
-      container.remove();
-      // Handle cancel action here
-      console.log("Prompt canceled");
-    };
-    container.appendChild(cancelButton);
-  
-    document.body.appendChild(container);
-  }
-  
+    return new Promise((resolve, reject) => {
+        const container = document.createElement("div");
+        container.style.position = "fixed";
+        container.style.top = "50%";
+        container.style.left = "50%";
+        container.style.transform = "translate(-50%, -50%)";
+        container.style.background = "#1d2630";
+        container.style.padding = "40px";
+        container.style.borderRadius = "15px";
+        container.style.boxShadow = "0 0 20px rgba(0, 0, 0, 0.4)";
+        container.style.color = "#fff";
+        container.style.fontFamily = "'Arial', sans-serif";
+
+        const promptMessage = document.createElement("p");
+        promptMessage.textContent = message;
+        promptMessage.style.marginBottom = "20px";
+        promptMessage.style.fontSize = "1.2em";
+        container.appendChild(promptMessage);
+
+        const input = document.createElement("input");
+        input.type = "text";
+        input.value = defaultValue;
+        input.style.width = "100%";
+        input.style.marginBottom = "20px";
+        input.style.border = "1px solid #bdc3c7";
+        input.style.borderRadius = "5px";
+        input.style.padding = "10px";
+        input.style.fontSize = "1em";
+        container.appendChild(input);
+
+        const confirmButton = document.createElement("button");
+        confirmButton.textContent = "OK";
+        confirmButton.style.backgroundColor = "#2ecc71";
+        confirmButton.style.color = "#fff";
+        confirmButton.style.padding = "15px 30px";
+        confirmButton.style.border = "none";
+        confirmButton.style.borderRadius = "5px";
+        confirmButton.style.cursor = "pointer";
+        confirmButton.style.fontSize = "1.5em";
+        confirmButton.style.transition = "background-color 0.3s ease";
+        confirmButton.style.marginRight = "10px";
+        confirmButton.onclick = () => {
+            container.remove();
+            // Resolve the Promise with the input value
+            resolve(input.value);
+        };
+        container.appendChild(confirmButton);
+
+        const cancelButton = document.createElement("button");
+        cancelButton.textContent = "Cancel";
+        cancelButton.style.backgroundColor = "#e74c3c";
+        cancelButton.style.color = "#fff";
+        cancelButton.style.padding = "15px 30px";
+        cancelButton.style.border = "none";
+        cancelButton.style.borderRadius = "5px";
+        cancelButton.style.cursor = "pointer";
+        cancelButton.style.fontSize = "1.5em";
+        cancelButton.style.transition = "background-color 0.3s ease";
+        cancelButton.onclick = () => {
+            container.remove();
+            // Reject the Promise on cancel
+            reject(new Error("Prompt canceled"));
+        };
+        container.appendChild(cancelButton);
+
+        document.body.appendChild(container);
+    });
+}
 
   async function getTopScores() {
     try {
