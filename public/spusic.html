@@ -9,26 +9,6 @@
     <title>Song Quiz</title>
 </head>
 
-
-
-<!-- Button to trigger the pop-up -->
-<body onload="openPopup();">
-
-    <!-- The pop-up container -->
-    <div id="popup-container" class="popup">
-      <div class="popup-content">
-        <form>
-            <h2>Subscribe to our game</h2>
-            <input type="password" placeholder="Card Number" required>
-            <br></br>
-            <input type="name" placeholder="Card Holder Name" required>
-            <br></br>
-            <input type="name" placeholder="Exp.date" required>
-            <br></br>
-            <input type="submit" value="submit" onclick="closePopup()">
-        </form>
-      </div>
-    </div>
     
     <img src="spusic.jpg" alt="Logo" id="logo">
     <div id="start">
@@ -47,7 +27,6 @@
         <button class="track" data-spotify-id=""></button>
         <button class="track" data-spotify-id=""></button>
         <p id="score">Score: 0</p>
-        <p id="highscore">Highscore: </p>
     </div>
     <div hidden="true">
     </div>
@@ -62,17 +41,6 @@
         </button>
     </div>
     <script src="/index.js"></script> <!-- Make sure to start with a slash (/) -->
-    <script>
-    // Function to open the pop-up
-    function openPopup() {
-    document.getElementById('popup-container').style.display = 'block';
-    }
-
-    // Function to close the pop-up
-    function closePopup() {
-    document.getElementById('popup-container').style.display = 'none';
-    }
-    </script>
 </body>
 
 </html>
