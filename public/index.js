@@ -353,15 +353,6 @@ function realisticPrompt(message, defaultValue = "") {
     });
 }
 
-// Example usage:
-realisticPrompt("Enter your username")
-    .then(username => {
-        console.log("Username entered:", username);
-    })
-    .catch(error => {
-        console.log(error.message);
-    });
-
 
   async function getTopScores() {
     try {
