@@ -165,46 +165,46 @@ app.post('/submitScore', async (req, res) => {
     console.log("we are in the post")
     console.log(`here is the current score ${score}`)
     
-//     // Validate player name and score
-//     if (!playerName || isNaN(score)) {
-//         res.status(400).json({ error: 'Invalid data format' });
-//         return;
-//     }
-//     console.log("we passed validation");
+    // Validate player name and score
+    if (!playerName || isNaN(score)) {
+        res.status(400).json({ error: 'Invalid data format' });
+        return;
+    }
+    console.log("we passed validation");
 
-//     try {
-//         // Connect to MongoDB and save the score
-//         const client = await MongoClient.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
-//         console.log("connected to mongo");
+    try {
+        // Connect to MongoDB and save the score
+        const client = await MongoClient.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+        console.log("connected to mongo");
         
-//         const dbo = client.db('Spusic');
-//         const collection = dbo.collection('highscore');
+        const dbo = client.db('Spusic');
+        const collection = dbo.collection('highscore');
 
-//         // Find the existing player
-//         const existingPlayer = await collection.findOne({ name: playerName });
+        // Find the existing player
+        const existingPlayer = await collection.findOne({ name: playerName });
 
-//         if (!existingPlayer || score > existingPlayer.score) {
-//             // Update the score for the player only if the new score is higher
-//             const result = await collection.updateOne(
-//                 { name: playerName },
-//                 { $set: { score: score } },
-//                 { upsert: true } // Create a new document if the player doesn't exist
-//             );
+        if (!existingPlayer || score > existingPlayer.score) {
+            // Update the score for the player only if the new score is higher
+            const result = await collection.updateOne(
+                { name: playerName },
+                { $set: { score: score } },
+                { upsert: true } // Create a new document if the player doesn't exist
+            );
 
-//             console.log('Score saved successfully');
-//             res.status(200).json({ message: 'Score saved successfully' });
-//         } else {
-//             console.log('New score is not higher. Score not updated.');
-//             res.status(200).json({ message: 'Score not updated. New score is not higher.' });
-//         }
+            console.log('Score saved successfully');
+            res.status(200).json({ message: 'Score saved successfully' });
+        } else {
+            console.log('New score is not higher. Score not updated.');
+            res.status(200).json({ message: 'Score not updated. New score is not higher.' });
+        }
 
-//         // Close the MongoDB connection
-//         client.close();
-//     } catch (error) {
-//         console.error('Error connecting to the database or saving score:', error);
-//         res.status(500).json({ error: 'Internal Server Error' });
-//     }
-// });
+        // Close the MongoDB connection
+        client.close();
+    } catch (error) {
+        console.error('Error connecting to the database or saving score:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 
     //   app.get('/getTopScores', async (req, res) => {
