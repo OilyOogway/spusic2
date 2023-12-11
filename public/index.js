@@ -132,7 +132,6 @@ function setupGame() {
 
     // Show track buttons and score
     document.getElementById('tracks').hidden = false;
-    document.getElementById('highscore').hidden = false;
     score_display.innerText = "Score: " + score;
 
     getHighScore();
